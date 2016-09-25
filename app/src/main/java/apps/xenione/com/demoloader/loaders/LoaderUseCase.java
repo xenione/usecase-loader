@@ -11,7 +11,7 @@ import java.util.concurrent.Callable;
  * Created by Eugeni on 24/04/2016.
  */
 public class LoaderUseCase<T> extends AsyncTaskLoader<LoaderUseCase.LoaderUseCaseResult<T>> {
-    
+
     private final Callable<T> callable;
     private T result;
 
