@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">DemoLoader</string>
     <string name="action_settings">Settings</string>
+    <string name="dialog_title">Add new note</string>
+    <string name="dialog_save">save</string>
+    <string name="dialog_cancel">cancel</string>
+    <string name="dialog_continue">I get It</string>
+    <string name="dialog_info">your note is correct saved</string>
 </resources>

@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Eugeni on 24/04/2016.
  */
-public class NoteListFragment extends Fragment {
+public class NoteListFragment extends Fragment  {
 
     public static final String TAG = "NoteListFragment";
 
@@ -47,6 +47,7 @@ public class NoteListFragment extends Fragment {
     private NoteAdapter adapter;
     private List<Note> notes = new ArrayList<>();
     private NoteDao mNoteDao;
+    private OnNoteListCallback mOnNoteListCallback;
 
 
     @Override
@@ -58,6 +59,11 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        try {
+            mOnNoteListCallback = (OnNoteListCallback) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Parent activity must implement OnNoteListCallback");
+        }
     }
 
     @Nullable
@@ -78,11 +84,11 @@ public class NoteListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Add new Note", Snackbar.LENGTH_LONG)
-                        .setAction("Action", new View.OnClickListener() {
+                Snackbar.make(view, "Do you want to add new note?", Snackbar.LENGTH_LONG)
+                        .setAction("Yes", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                mOnNoteListCallback.onAddNoteClick();
                             }
                         }).show();
             }

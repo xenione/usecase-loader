@@ -13,8 +13,9 @@ import java.util.concurrent.Callable;
 public class LoaderUseCase<T> extends AsyncTaskLoader<LoaderUseCase.LoaderUseCaseResult<T>> {
 
     private final Callable<T> callable;
-    private T result;
+    private LoaderUseCaseResult<T> result;
 
+    @SuppressWarnings("unchecked")
     public LoaderUseCase(Runnable runnable) {
         this((Callable<T>) WrapUseCase.wrap(runnable));
     }
@@ -39,7 +40,7 @@ public class LoaderUseCase<T> extends AsyncTaskLoader<LoaderUseCase.LoaderUseCas
     @Override
     public void deliverResult(LoaderUseCaseResult<T> result) {
         if(!result.isError()) {
-            this.result = result.data;
+            this.result = result;
         }
 
         if (isStarted()) {
@@ -50,7 +51,7 @@ public class LoaderUseCase<T> extends AsyncTaskLoader<LoaderUseCase.LoaderUseCas
     @Override
     protected void onStartLoading() {
         if (result != null) {
-            deliverResult(LoaderUseCaseResult.success(result));
+            deliverResult(result);
         }
 
         if (takeContentChanged() || result == null) {

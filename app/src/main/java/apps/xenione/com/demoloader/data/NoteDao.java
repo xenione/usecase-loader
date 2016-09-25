@@ -14,6 +14,8 @@ public class NoteDao {
         add(new Note("note 1", "this is the note 1"));
         add(new Note("note 2", "this is the note 2"));
         add(new Note("note 3", "this is the note 3"));
+        add(new Note("note 4", "this is the note 4"));
+        add(new Note("note 5", "this is the note 5"));
     }};
 
     private static Comparator<Note> DATE_COMPARATOR = new Comparator<Note>() {
