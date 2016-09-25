@@ -1,6 +1,7 @@
 package apps.xenione.com.demoloader.presentation.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -87,6 +88,7 @@ public class NewNoteDialog extends DialogFragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_new_note, container, false);
         ButterKnife.bind(this, view);
         initViews(savedInstanceState);
+        getDialog().setCanceledOnTouchOutside(false);
         return view;
     }
 
@@ -133,6 +135,12 @@ public class NewNoteDialog extends DialogFragment {
             mLoaderManager.restartLoader(ADD_NEW_NOTE_LOADER_ID, null, noteAddedLoaderCallback);
         }
     };
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        mLoaderManager.getLoader(ADD_NEW_NOTE_LOADER_ID).cancelLoad();
+    }
 
     private View.OnClickListener continueAction = new View.OnClickListener() {
         @Override
