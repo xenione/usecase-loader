@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +109,7 @@ public class NewNoteDialog extends DialogFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean("isInProgress", isProgress());
+        outState.putBoolean("isInProgress", isInProgress());
         super.onSaveInstanceState(outState);
     }
 
@@ -139,7 +140,10 @@ public class NewNoteDialog extends DialogFragment {
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
-        mLoaderManager.getLoader(ADD_NEW_NOTE_LOADER_ID).cancelLoad();
+        Loader<Void> loader = mLoaderManager.getLoader(ADD_NEW_NOTE_LOADER_ID);
+        if (loader != null) {
+            loader.cancelLoad();
+        }
     }
 
     private View.OnClickListener continueAction = new View.OnClickListener() {
@@ -174,7 +178,7 @@ public class NewNoteDialog extends DialogFragment {
         }
     };
 
-    private boolean isProgress() {
+    private boolean isInProgress() {
         return progressBar.isShown();
     }
 
