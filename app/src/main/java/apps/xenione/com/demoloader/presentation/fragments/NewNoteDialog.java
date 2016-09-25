@@ -15,7 +15,7 @@ import android.widget.TextView;
 import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.data.Note;
 import apps.xenione.com.demoloader.data.NoteDao;
-import apps.xenione.com.demoloader.loaders.LoaderUseCase;
+import apps.xenione.com.demoloader.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.presentation.App;
 import apps.xenione.com.demoloader.usecases.AddNoteUseCase;
 import butterknife.Bind;
@@ -142,7 +142,7 @@ public class NewNoteDialog extends DialogFragment {
         }
     };
 
-    private LoaderUseCase.LoaderUseCaseCallback<Void> noteAddedLoaderCallback = new LoaderUseCase.LoaderUseCaseCallback<Void>() {
+    private UseCaseLoader.UseCaseLoaderCallback<Void> noteAddedLoaderCallback = new UseCaseLoader.UseCaseLoaderCallback<Void>() {
 
         @Override
         public void onStart() {
@@ -161,8 +161,8 @@ public class NewNoteDialog extends DialogFragment {
         }
 
         @Override
-        public LoaderUseCase<Void> onCreateUseCaseLoader(Bundle args) {
-            return new LoaderUseCase<>(new AddNoteUseCase(mNoteDao, note));
+        public UseCaseLoader<Void> onCreateUseCaseLoader(Bundle args) {
+            return new UseCaseLoader<>(new AddNoteUseCase(mNoteDao, note));
         }
     };
 

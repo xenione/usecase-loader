@@ -20,7 +20,7 @@ import java.util.List;
 import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.data.Note;
 import apps.xenione.com.demoloader.data.NoteDao;
-import apps.xenione.com.demoloader.loaders.LoaderUseCase;
+import apps.xenione.com.demoloader.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.presentation.App;
 import apps.xenione.com.demoloader.presentation.adapters.NoteAdapter;
 import apps.xenione.com.demoloader.usecases.GetNoteUseCase;
@@ -112,7 +112,7 @@ public class NoteListFragment extends Fragment  {
         ButterKnife.unbind(this);
     }
 
-    private LoaderUseCase.LoaderUseCaseCallback<List<Note>> noteListLoaderCallback = new LoaderUseCase.LoaderUseCaseCallback<List<Note>>() {
+    private UseCaseLoader.UseCaseLoaderCallback<List<Note>> noteListLoaderCallback = new UseCaseLoader.UseCaseLoaderCallback<List<Note>>() {
 
         @Override
         public void onStart() {
@@ -130,8 +130,8 @@ public class NoteListFragment extends Fragment  {
         }
 
         @Override
-        public LoaderUseCase<List<Note>> onCreateUseCaseLoader(Bundle args) {
-            return new LoaderUseCase<>(new GetNoteUseCase(mNoteDao));
+        public UseCaseLoader<List<Note>> onCreateUseCaseLoader(Bundle args) {
+            return new UseCaseLoader<>(new GetNoteUseCase(mNoteDao));
         }
     };
 }
