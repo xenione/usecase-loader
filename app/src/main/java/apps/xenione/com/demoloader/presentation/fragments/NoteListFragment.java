@@ -82,7 +82,7 @@ public class NoteListFragment extends Fragment {
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                               
+
                             }
                         }).show();
             }
