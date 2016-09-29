@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,20 +18,18 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import apps.xenione.com.demoloader.Domain.Note;
 import apps.xenione.com.demoloader.R;
-import apps.xenione.com.demoloader.data.Note;
-import apps.xenione.com.demoloader.data.NoteDao;
 import apps.xenione.com.demoloader.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.presentation.App;
 import apps.xenione.com.demoloader.presentation.adapters.NoteAdapter;
-import apps.xenione.com.demoloader.usecases.GetNoteUseCase;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * Created by Eugeni on 24/04/2016.
  */
-public class NoteListFragment extends Fragment  {
+public class NoteListFragment extends Fragment {
 
     public static final String TAG = "NoteListFragment";
 
@@ -46,14 +45,13 @@ public class NoteListFragment extends Fragment  {
     FloatingActionButton fab;
     private NoteAdapter adapter;
     private List<Note> notes = new ArrayList<>();
-    private NoteDao mNoteDao;
     private OnNoteListCallback mOnNoteListCallback;
-
+    private LoaderManager mLoaderManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNoteDao = App.getNoteDao(getContext());
+        mLoaderManager = App.getLoaderManager(getActivity());
     }
 
     @Override
@@ -81,29 +79,32 @@ public class NoteListFragment extends Fragment  {
         list.setLayoutManager(layoutManager);
         adapter = new NoteAdapter(notes);
         list.setAdapter(adapter);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Do you want to add new note?", Snackbar.LENGTH_LONG)
-                        .setAction("Yes", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mOnNoteListCallback.onAddNoteClick();
-                            }
-                        }).show();
-            }
-        });
+        fab.setOnClickListener(onAddNoteClickListener);
     }
 
+    private View.OnClickListener onAddNoteClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Snackbar.make(v, "Do you want to add new note?", Snackbar.LENGTH_LONG)
+                    .setAction("Yes", onConfirmAddNoteClickListener).show();
+        }
+    };
+
+    private View.OnClickListener onConfirmAddNoteClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mOnNoteListCallback.onAddNoteClick();
+        }
+    };
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(LOAD_NOTE_LIST_LOADER_ID, null, noteListLoaderCallback);
+        mLoaderManager.initLoader(LOAD_NOTE_LIST_LOADER_ID, null, noteListLoaderCallback);
     }
 
     public void refreshList() {
-        getLoaderManager().restartLoader(LOAD_NOTE_LIST_LOADER_ID, null, noteListLoaderCallback);
+        mLoaderManager.restartLoader(LOAD_NOTE_LIST_LOADER_ID, null, noteListLoaderCallback);
     }
 
     @Override
@@ -126,12 +127,12 @@ public class NoteListFragment extends Fragment  {
 
         @Override
         public void onFailure(Exception e) {
-            Toast.makeText(getContext(), "something goes wronggg!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "something goes wrong, try later!!!", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public UseCaseLoader<List<Note>> onCreateUseCaseLoader(Bundle args) {
-            return new UseCaseLoader<>(new GetNoteUseCase(mNoteDao));
+            return new UseCaseLoader<>(App.getGetNoteUseCase(getActivity()));
         }
     };
 }

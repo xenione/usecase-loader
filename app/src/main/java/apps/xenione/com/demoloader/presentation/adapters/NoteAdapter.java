@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import apps.xenione.com.demoloader.R;
-import apps.xenione.com.demoloader.data.Note;
+import apps.xenione.com.demoloader.Domain.Note;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

@@ -19,12 +19,11 @@ public class WrapUseCase<T> implements Callable<T> {
 
     private Callable<T> mCallable;
 
-
-
     public WrapUseCase(Callable<T> callable) {
         mCallable = callable;
     }
 
+    @SuppressWarnings("unchecked")
     public WrapUseCase(Runnable runnable) {
         mCallable = (Callable<T>) Executors.callable(runnable);
     }

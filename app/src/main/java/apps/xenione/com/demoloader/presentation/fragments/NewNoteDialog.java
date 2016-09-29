@@ -14,12 +14,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import apps.xenione.com.demoloader.Domain.Note;
 import apps.xenione.com.demoloader.R;
-import apps.xenione.com.demoloader.data.Note;
-import apps.xenione.com.demoloader.data.NoteDao;
 import apps.xenione.com.demoloader.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.presentation.App;
-import apps.xenione.com.demoloader.usecases.AddNoteUseCase;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -53,7 +51,6 @@ public class NewNoteDialog extends DialogFragment {
     @Bind(R.id.add_new_continue)
     Button continueBtn;
 
-    private NoteDao mNoteDao;
     private LoaderManager mLoaderManager;
     private Note note;
     private OnNewNoteCallback mOnNewNoteCallback;
@@ -61,7 +58,6 @@ public class NewNoteDialog extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNoteDao = App.getNoteDao(getActivity());
         mLoaderManager = App.getLoaderManager(getActivity());
     }
 
@@ -88,15 +84,21 @@ public class NewNoteDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_new_note, container, false);
         ButterKnife.bind(this, view);
-        initViews(savedInstanceState);
-        getDialog().setCanceledOnTouchOutside(false);
+        initViews();
         return view;
     }
 
-    private void initViews(Bundle savedInstanceState) {
+    private void initViews() {
         cancelBtn.setOnClickListener(cancelAction);
         saveBtn.setOnClickListener(saveAction);
         continueBtn.setOnClickListener(continueAction);
+        getDialog().setCanceledOnTouchOutside(false);
+        getDialog().setTitle("Add new Note");
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
             boolean inProgress = savedInstanceState.getBoolean("isInProgress", false);
             if (inProgress) {
@@ -174,7 +176,7 @@ public class NewNoteDialog extends DialogFragment {
 
         @Override
         public UseCaseLoader<Void> onCreateUseCaseLoader(Bundle args) {
-            return new UseCaseLoader<>(new AddNoteUseCase(mNoteDao, note));
+            return new UseCaseLoader<>(App.getAddNoteUseCase(getActivity(), note));
         }
     };
 

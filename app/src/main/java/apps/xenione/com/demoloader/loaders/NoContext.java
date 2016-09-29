@@ -69,7 +69,6 @@ public class NoContext extends Context {
 
     @Override
     public void setTheme(int resid) {
-
     }
 
     @Override
