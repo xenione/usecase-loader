@@ -79,6 +79,10 @@ public interface NoteListContract {
             super.onActivityCreated(savedInstanceState);
             presenter = new NoteListPresenter(getActivity());
             presenter.attach(this);
+            init();
+        }
+
+        public void init() {
             presenter.init();
         }
 

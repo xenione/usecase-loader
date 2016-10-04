@@ -1,5 +1,6 @@
 package apps.xenione.com.demoloader.presentation.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,6 +34,10 @@ public interface NoteViewContract {
 
     public class NewNoteDialog extends DialogFragment implements NoteViewContract {
 
+        public interface OnNewNoteAddCallback {
+            void onNewNoteAdded();
+        }
+
         public static DialogFragment newInstance() {
             return new NewNoteDialog();
         }
@@ -53,6 +58,7 @@ public interface NoteViewContract {
         Button continueBtn;
 
         private NewNotePresenter presenter;
+        private OnNewNoteAddCallback mOnNewNoteAddCallback;
 
         @Nullable
         @Override
@@ -69,6 +75,16 @@ public interface NoteViewContract {
             continueBtn.setOnClickListener(continueAction);
             getDialog().setCanceledOnTouchOutside(false);
             getDialog().setTitle("Add new Note");
+        }
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            try {
+                mOnNewNoteAddCallback = (OnNewNoteAddCallback) context;
+            } catch (ClassCastException e) {
+                throw new ClassCastException("Parent must implement OnNewNoteListCallback");
+            }
         }
 
         @Override
@@ -114,6 +130,7 @@ public interface NoteViewContract {
             public void onClick(View v) {
                 dismiss();
                 presenter.finish();
+                mOnNewNoteAddCallback.onNewNoteAdded();
             }
         };
 

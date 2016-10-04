@@ -32,10 +32,6 @@ public class NoteListPresenter extends BasePresenter<NoteListContract> {
         mLoaderManager.initLoader(LIST_NOTE_LOADER_ID, null, getListNoteLoaderCallback);
     }
 
-    public void restart() {
-        mLoaderManager.initLoader(LIST_NOTE_LOADER_ID, null, getListNoteLoaderCallback);
-    }
-
     private UseCaseLoader.UseCaseLoaderCallback<List<Note>> getListNoteLoaderCallback = new UseCaseLoader.UseCaseLoaderCallback<List<Note>>() {
 
         @Override

@@ -10,12 +10,16 @@ import apps.xenione.com.demoloader.presentation.fragments.NoteListContract.NoteL
 import apps.xenione.com.demoloader.presentation.fragments.NoteViewContract.NewNoteDialog;
 
 
-public class MainActivity extends AppCompatActivity implements NoteListFragment.OnNoteListCallback {
+public class MainActivity extends AppCompatActivity implements NoteListFragment.OnNoteListCallback,
+        NewNoteDialog.OnNewNoteAddCallback {
+
+    NoteListFragment mNoteListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mNoteListFragment = (NoteListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
     }
 
     @Override
@@ -26,5 +30,10 @@ public class MainActivity extends AppCompatActivity implements NoteListFragment.
             prevDialog.dismiss();
         }
         NewNoteDialog.newInstance().show(fm, "dialog");
+    }
+
+    @Override
+    public void onNewNoteAdded() {
+        mNoteListFragment.init();
     }
 }
