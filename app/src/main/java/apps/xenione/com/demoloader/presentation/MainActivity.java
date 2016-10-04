@@ -6,22 +6,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import apps.xenione.com.demoloader.R;
-import apps.xenione.com.demoloader.presentation.fragments.NewNoteDialog;
-import apps.xenione.com.demoloader.presentation.fragments.NoteListFragment;
+import apps.xenione.com.demoloader.presentation.fragments.NoteListContract.NoteListFragment;
+import apps.xenione.com.demoloader.presentation.fragments.NoteViewContract.NewNoteDialog;
 
-import static apps.xenione.com.demoloader.presentation.fragments.NoteListFragment.OnNoteListCallback;
 
-public class MainActivity extends AppCompatActivity implements OnNoteListCallback, NewNoteDialog.OnNewNoteCallback {
-
-    private NoteListFragment mNoteListFragment;
+public class MainActivity extends AppCompatActivity implements NoteListFragment.OnNoteListCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (mNoteListFragment == null) {
-            mNoteListFragment = (NoteListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
-        }
     }
 
     @Override
@@ -32,10 +26,5 @@ public class MainActivity extends AppCompatActivity implements OnNoteListCallbac
             prevDialog.dismiss();
         }
         NewNoteDialog.newInstance().show(fm, "dialog");
-    }
-
-    @Override
-    public void onNoteAdded() {
-        mNoteListFragment.refreshList();
     }
 }

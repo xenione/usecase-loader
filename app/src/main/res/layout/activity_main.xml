@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="apps.xenione.com.demoloader.presentation.fragments.NoteListFragment"
+        android:name="apps.xenione.com.demoloader.presentation.fragments.NoteListContract$NoteListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center" />

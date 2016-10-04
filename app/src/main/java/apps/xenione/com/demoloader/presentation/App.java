@@ -24,7 +24,7 @@ public class App extends Application {
         mNoteRepository = new NoteRepository();
     }
 
-    public static NoteRepository getNoteDao(Context context) {
+    public static NoteRepository getNoteRepository(Context context) {
         return ((App) context.getApplicationContext()).mNoteRepository;
     }
 
@@ -37,10 +37,10 @@ public class App extends Application {
     }
 
     public static AddNoteUseCase getAddNoteUseCase(FragmentActivity activity, Note note) {
-        return new AddNoteUseCase(getNoteDao(activity), note);
+        return new AddNoteUseCase(getNoteRepository(activity), note);
     }
 
     public static GetNoteUseCase getGetNoteUseCase(FragmentActivity activity) {
-        return new GetNoteUseCase(getNoteDao(activity));
+        return new GetNoteUseCase(getNoteRepository(activity));
     }
 }
