@@ -8,8 +8,8 @@ import android.support.v4.app.LoaderManager;
 
 import apps.xenione.com.demoloader.domain.Note;
 import apps.xenione.com.demoloader.domain.NoteRepository;
-import apps.xenione.com.demoloader.usecases.AddNoteUseCase;
-import apps.xenione.com.demoloader.usecases.GetNoteUseCase;
+import apps.xenione.com.demoloader.domain.usecases.AddNoteUseCase;
+import apps.xenione.com.demoloader.domain.usecases.GetNoteUseCase;
 
 /**
  * Created by Eugeni on 17/09/2016.
