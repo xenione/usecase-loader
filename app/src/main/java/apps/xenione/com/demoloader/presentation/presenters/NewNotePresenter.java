@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
-import apps.xenione.com.demoloader.Domain.Note;
+import apps.xenione.com.demoloader.domain.Note;
 import apps.xenione.com.demoloader.infrastructure.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.infrastructure.presenters.BasePresenter;
 import apps.xenione.com.demoloader.presentation.App;

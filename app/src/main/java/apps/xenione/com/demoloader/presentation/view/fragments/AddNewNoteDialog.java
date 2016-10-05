@@ -12,10 +12,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import apps.xenione.com.demoloader.Domain.Note;
+import apps.xenione.com.demoloader.domain.Note;
 import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.presentation.presenters.NewNotePresenter;
 import apps.xenione.com.demoloader.presentation.view.contracts.AddNewNoteContract;
+import apps.xenione.com.demoloader.presentation.view.widgets.FieldView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -33,10 +34,10 @@ public class AddNewNoteDialog extends DialogFragment implements AddNewNoteContra
         return new AddNewNoteDialog();
     }
 
-    @Bind(R.id.add_note_title)
-    TextView titleText;
-    @Bind(R.id.add_note_body)
-    TextView bodyText;
+    @Bind(R.id.title_fieldView)
+    FieldView titleText;
+    @Bind(R.id.value_fieldView)
+    FieldView bodyText;
     @Bind(R.id.add_note_progress)
     ProgressBar progressBar;
     @Bind(R.id.add_note_info)
@@ -65,7 +66,7 @@ public class AddNewNoteDialog extends DialogFragment implements AddNewNoteContra
         saveBtn.setOnClickListener(saveAction);
         continueBtn.setOnClickListener(continueAction);
         getDialog().setCanceledOnTouchOutside(false);
-        getDialog().setTitle("Add new Note");
+        getDialog().setTitle("Add New Note");
     }
 
     @Override
@@ -104,8 +105,8 @@ public class AddNewNoteDialog extends DialogFragment implements AddNewNoteContra
     private View.OnClickListener saveAction = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String title = titleText.getText().toString();
-            String body = bodyText.getText().toString();
+            String title = titleText.getText();
+            String body = bodyText.getText();
             presenter.save(new Note(title, body));
         }
     };

@@ -1,8 +1,8 @@
 package apps.xenione.com.demoloader.usecases;
 
 
-import apps.xenione.com.demoloader.Domain.Note;
-import apps.xenione.com.demoloader.Domain.NoteRepository;
+import apps.xenione.com.demoloader.domain.Note;
+import apps.xenione.com.demoloader.domain.NoteRepository;
 
 /**
  * Created by Eugeni on 24/04/2016.

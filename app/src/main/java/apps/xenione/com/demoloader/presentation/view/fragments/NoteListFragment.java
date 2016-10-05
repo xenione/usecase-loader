@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
-import apps.xenione.com.demoloader.Domain.Note;
+import apps.xenione.com.demoloader.domain.Note;
 import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.presentation.adapters.NoteAdapter;
 import apps.xenione.com.demoloader.presentation.presenters.NoteListPresenter;

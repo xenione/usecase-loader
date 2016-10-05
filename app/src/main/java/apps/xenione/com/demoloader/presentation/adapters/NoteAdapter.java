@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import apps.xenione.com.demoloader.R;
-import apps.xenione.com.demoloader.Domain.Note;
+import apps.xenione.com.demoloader.domain.Note;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -39,7 +39,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Note note = getItem(position);
-        holder.title.setText(note.getDescription());
+        holder.title.setText(note.getTitle());
+        holder.body.setText(note.getDescription());
     }
 
     @Override
@@ -54,6 +55,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.note_title)
         public TextView title;
+        @Bind(R.id.note_body)
+        public TextView body;
 
         public ViewHolder(View v) {
             super(v);

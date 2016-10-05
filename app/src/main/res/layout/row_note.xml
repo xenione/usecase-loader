@@ -4,13 +4,28 @@
     android:padding="@dimen/row_padding"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/colorAccent">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/note_title"
+        style="@style/TitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Note title"/>
+        tools:text="Note title" />
+
+    <TextView
+        android:id="@+id/note_body"
+        style="@style/SubTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="2"
+        android:paddingLeft="@dimen/sub_title_padding"
+        tools:text="sub title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_height="@dimen/divider_height"
+        android:background="@android:drawable/divider_horizontal_bright"/>
 
 </LinearLayout>

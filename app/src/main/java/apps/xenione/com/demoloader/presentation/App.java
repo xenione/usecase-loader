@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 
-import apps.xenione.com.demoloader.Domain.Note;
-import apps.xenione.com.demoloader.Domain.NoteRepository;
+import apps.xenione.com.demoloader.domain.Note;
+import apps.xenione.com.demoloader.domain.NoteRepository;
 import apps.xenione.com.demoloader.usecases.AddNoteUseCase;
 import apps.xenione.com.demoloader.usecases.GetNoteUseCase;
 

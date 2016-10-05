@@ -1,4 +1,4 @@
-package apps.xenione.com.demoloader.Domain;
+package apps.xenione.com.demoloader.domain;
 
 
 import java.util.ArrayList;
@@ -12,11 +12,15 @@ import java.util.List;
 public class NoteRepository {
 
     private static List<Note> NOTES = new ArrayList<Note>() {{
-        add(new Note("Note 1", "This is the note 1"));
-        add(new Note("Note 2", "This is the note 2"));
-        add(new Note("Note 3", "This is the note 3"));
-        add(new Note("Note 4", "This is the note 4"));
-        add(new Note("Note 5", "This is the note 5"));
+        add(new Note("Tres de pego", "Fins ací hem arribat els que veníem del poble de Pego. " +
+                "I no sé res dels meus companys però he perdut tota esperança, " +
+                "ja res més puc esperar."));
+        add(new Note("Farem saó", "El tio Pep, els quintos d\'Alzira i els guerrers de Moixent " +
+                "El Rat Penat, el moro Muza, el tio Canya I Rosariet la carnissera de la Xara " +
+                "La Dama d\'Elx, la Delicà de Gandia i el Miquelet de la Seu"));
+        add(new Note("Quina calitja", "S\'han acabat tardors i primaveres, i els tarongers floreixen " +
+                "pel febrer. Puja la mar i trenca les barreres, i el temps que ens queda " +
+                "s\'acaba, s\'acaba, s\'acab."));
     }};
 
     private static Comparator<Note> DATE_COMPARATOR = new Comparator<Note>() {

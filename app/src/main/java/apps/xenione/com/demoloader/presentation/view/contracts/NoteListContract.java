@@ -2,7 +2,7 @@ package apps.xenione.com.demoloader.presentation.view.contracts;
 
 import java.util.List;
 
-import apps.xenione.com.demoloader.Domain.Note;
+import apps.xenione.com.demoloader.domain.Note;
 
 /**
  * Created by Eugeni on 05/10/2016.
