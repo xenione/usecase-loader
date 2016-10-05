@@ -9,12 +9,12 @@ import apps.xenione.com.demoloader.Domain.Note;
 import apps.xenione.com.demoloader.infrastructure.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.infrastructure.presenters.BasePresenter;
 import apps.xenione.com.demoloader.presentation.App;
-import apps.xenione.com.demoloader.presentation.fragments.NoteViewContract;
+import apps.xenione.com.demoloader.presentation.view.contracts.AddNewNoteContract;
 
 /**
  * Created by Eugeni on 03/10/2016.
  */
-public class NewNotePresenter extends BasePresenter<NoteViewContract> {
+public class NewNotePresenter extends BasePresenter<AddNewNoteContract> {
 
     public static final int ADD_NEW_NOTE_LOADER_ID = 102;
 

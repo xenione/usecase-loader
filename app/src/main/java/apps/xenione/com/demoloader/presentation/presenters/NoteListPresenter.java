@@ -10,7 +10,7 @@ import apps.xenione.com.demoloader.Domain.Note;
 import apps.xenione.com.demoloader.infrastructure.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.infrastructure.presenters.BasePresenter;
 import apps.xenione.com.demoloader.presentation.App;
-import apps.xenione.com.demoloader.presentation.fragments.NoteListContract;
+import apps.xenione.com.demoloader.presentation.view.contracts.NoteListContract;
 
 /**
  * Created by Eugeni on 04/10/2016.
