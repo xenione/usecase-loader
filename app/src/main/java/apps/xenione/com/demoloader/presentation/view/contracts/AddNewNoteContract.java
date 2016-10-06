@@ -12,4 +12,5 @@ public interface AddNewNoteContract {
     void showEditNote();
 
     void showError();
+
 }

@@ -122,7 +122,6 @@ public class AddNewNoteDialog extends DialogFragment implements AddNewNoteContra
         public void onClick(View v) {
             dismiss();
             presenter.finish();
-            mOnNewNoteAddCallback.onNewNoteAdded();
         }
     };
 
@@ -144,6 +143,8 @@ public class AddNewNoteDialog extends DialogFragment implements AddNewNoteContra
         cancelBtn.setVisibility(View.GONE);
         saveBtn.setVisibility(View.GONE);
         continueBtn.setVisibility(View.VISIBLE);
+
+        mOnNewNoteAddCallback.onNewNoteAdded();
     }
 
     public void showEditNote() {
