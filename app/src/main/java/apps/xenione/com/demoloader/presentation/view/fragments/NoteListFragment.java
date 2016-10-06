@@ -13,14 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import apps.xenione.com.demoloader.domain.Note;
 import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.presentation.adapters.NoteAdapter;
 import apps.xenione.com.demoloader.presentation.presenters.NoteListPresenter;
 import apps.xenione.com.demoloader.presentation.view.contracts.NoteListContract;
+import apps.xenione.com.demoloader.presentation.viewModel.NoteViewModel;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -65,7 +62,7 @@ public class NoteListFragment extends Fragment implements NoteListContract {
         list.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         list.setLayoutManager(layoutManager);
-        adapter = new NoteAdapter(new ArrayList<Note>());
+        adapter = new NoteAdapter();
         list.setAdapter(adapter);
         fab.setOnClickListener(onAddNoteClickListener);
     }
@@ -99,7 +96,7 @@ public class NoteListFragment extends Fragment implements NoteListContract {
     }
 
     @Override
-    public void listNotes(List<Note> notes) {
+    public void listNotes(NoteViewModel notes) {
         progress.setVisibility(View.INVISIBLE);
         adapter.setNote(notes);
     }

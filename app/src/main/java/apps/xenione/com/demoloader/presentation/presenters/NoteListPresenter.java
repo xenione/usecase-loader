@@ -11,6 +11,7 @@ import apps.xenione.com.demoloader.infrastructure.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.infrastructure.presenters.BasePresenter;
 import apps.xenione.com.demoloader.presentation.App;
 import apps.xenione.com.demoloader.presentation.view.contracts.NoteListContract;
+import apps.xenione.com.demoloader.presentation.viewModel.NoteViewModel;
 
 /**
  * Created by Eugeni on 04/10/2016.
@@ -36,7 +37,7 @@ public class NoteListPresenter extends BasePresenter<NoteListContract> {
 
         @Override
         public void onSuccess(List<Note> notes) {
-            mView.listNotes(notes);
+            mView.listNotes(new NoteViewModel(notes));
         }
 
         @Override

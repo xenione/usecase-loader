@@ -6,10 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import apps.xenione.com.demoloader.R;
-import apps.xenione.com.demoloader.domain.Note;
+import apps.xenione.com.demoloader.presentation.viewModel.NoteViewModel;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -18,15 +16,17 @@ import butterknife.ButterKnife;
  */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
-    private List<Note> notes;
+    private NoteViewModel notes;
 
-    public NoteAdapter(List<Note> notes) {
+    public NoteAdapter() {
+    }
+
+    public NoteAdapter(NoteViewModel notes) {
         this.notes = notes;
     }
 
-    public void setNote(List<Note> notes) {
-        this.notes.clear();
-        this.notes.addAll(notes);
+    public void setNote(NoteViewModel notes) {
+        this.notes = notes;
         this.notifyDataSetChanged();
     }
 
@@ -38,18 +38,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Note note = getItem(position);
-        holder.title.setText(note.getTitle());
-        holder.body.setText(note.getDescription());
+        holder.title.setText(notes.getTitleBy(position));
+        holder.body.setText(notes.getDescriptioBy(position));
     }
 
     @Override
     public int getItemCount() {
         return notes.size();
-    }
-
-    public Note getItem(int position) {
-        return notes.get(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
