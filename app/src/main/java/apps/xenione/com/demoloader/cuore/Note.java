@@ -1,4 +1,4 @@
-package apps.xenione.com.demoloader.domain;
+package apps.xenione.com.demoloader.cuore;
 
 /**
  * Created by Eugeni on 25/09/2016.

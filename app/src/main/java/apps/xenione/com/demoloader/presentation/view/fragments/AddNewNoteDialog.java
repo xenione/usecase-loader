@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import apps.xenione.com.demoloader.domain.Note;
+import apps.xenione.com.demoloader.cuore.Note;
 import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.presentation.presenters.NewNotePresenter;
 import apps.xenione.com.demoloader.presentation.view.contracts.AddNewNoteContract;

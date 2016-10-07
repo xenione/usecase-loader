@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 
-import apps.xenione.com.demoloader.domain.Note;
-import apps.xenione.com.demoloader.domain.NoteRepository;
-import apps.xenione.com.demoloader.domain.usecases.AddNoteUseCase;
-import apps.xenione.com.demoloader.domain.usecases.GetNoteUseCase;
+import apps.xenione.com.demoloader.cuore.Note;
+import apps.xenione.com.demoloader.cuore.NoteRepository;
+import apps.xenione.com.demoloader.cuore.usecases.AddNoteUseCase;
+import apps.xenione.com.demoloader.cuore.usecases.GetNoteUseCase;
 
 /**
  * Created by Eugeni on 17/09/2016.

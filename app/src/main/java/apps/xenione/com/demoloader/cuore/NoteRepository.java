@@ -1,4 +1,4 @@
-package apps.xenione.com.demoloader.domain;
+package apps.xenione.com.demoloader.cuore;
 
 
 import java.util.ArrayList;

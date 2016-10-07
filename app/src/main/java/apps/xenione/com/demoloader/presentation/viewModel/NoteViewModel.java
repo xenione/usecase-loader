@@ -2,7 +2,7 @@ package apps.xenione.com.demoloader.presentation.viewModel;
 
 import java.util.List;
 
-import apps.xenione.com.demoloader.domain.Note;
+import apps.xenione.com.demoloader.cuore.Note;
 
 /**
  * Created by Eugeni on 06/10/2016.
