@@ -21,10 +21,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     public NoteAdapter() {
     }
 
-    public NoteAdapter(NoteViewModel notes) {
-        this.notes = notes;
-    }
-
     public void setNote(NoteViewModel notes) {
         this.notes = notes;
         this.notifyDataSetChanged();
@@ -38,8 +34,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(notes.getTitleBy(position));
-        holder.body.setText(notes.getDescriptioBy(position));
+        holder.title.setText(notes.getTitleFor(position));
+        holder.body.setText(notes.getDescriptionFor(position));
     }
 
     @Override

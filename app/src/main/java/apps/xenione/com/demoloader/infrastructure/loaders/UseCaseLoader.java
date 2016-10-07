@@ -65,7 +65,6 @@ public class UseCaseLoader<T> extends AsyncTaskLoader<UseCaseLoader.LoaderUseCas
         result = null;
     }
 
-
     public static abstract class UseCaseLoaderCallback<T> implements LoaderManager.LoaderCallbacks<LoaderUseCaseResult<T>> {
 
         public abstract void onSuccess(T u);

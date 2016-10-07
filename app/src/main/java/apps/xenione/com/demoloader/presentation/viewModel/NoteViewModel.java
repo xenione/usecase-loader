@@ -15,11 +15,11 @@ public class NoteViewModel {
         this.notes = notes;
     }
 
-    public String getTitleBy(int position) {
+    public String getTitleFor(int position) {
         return notes.get(position).getTitle();
     }
 
-    public String getDescriptioBy(int position) {
+    public String getDescriptionFor(int position) {
         return quotation(notes.get(position).getDescription());
     }
 

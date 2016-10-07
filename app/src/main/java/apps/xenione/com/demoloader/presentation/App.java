@@ -9,7 +9,7 @@ import android.support.v4.app.LoaderManager;
 import apps.xenione.com.demoloader.cuore.Note;
 import apps.xenione.com.demoloader.cuore.NoteRepository;
 import apps.xenione.com.demoloader.cuore.usecases.AddNoteUseCase;
-import apps.xenione.com.demoloader.cuore.usecases.GetNoteUseCase;
+import apps.xenione.com.demoloader.cuore.usecases.GetNoteListUseCase;
 
 /**
  * Created by Eugeni on 17/09/2016.
@@ -40,7 +40,7 @@ public class App extends Application {
         return new AddNoteUseCase(getNoteRepository(activity), note);
     }
 
-    public static GetNoteUseCase getGetNoteUseCase(FragmentActivity activity) {
-        return new GetNoteUseCase(getNoteRepository(activity));
+    public static GetNoteListUseCase getGetNoteUseCase(FragmentActivity activity) {
+        return new GetNoteListUseCase(getNoteRepository(activity));
     }
 }

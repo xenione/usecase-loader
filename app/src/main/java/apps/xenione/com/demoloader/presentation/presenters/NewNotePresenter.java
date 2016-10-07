@@ -28,10 +28,11 @@ public class NewNotePresenter extends BasePresenter<AddNewNoteContract> {
     }
 
     public void init() {
-        mView.showEditNote();
         if (mLoaderManager.getLoader(ADD_NEW_NOTE_LOADER_ID) != null) {
             mView.showProgress();
             mLoaderManager.initLoader(ADD_NEW_NOTE_LOADER_ID, null, noteAddedLoaderCallback);
+        } else {
+            mView.showEditNote();
         }
     }
 
@@ -49,6 +50,7 @@ public class NewNotePresenter extends BasePresenter<AddNewNoteContract> {
     public void save(Note note) {
         this.note = note;
         mLoaderManager.restartLoader(ADD_NEW_NOTE_LOADER_ID, null, noteAddedLoaderCallback);
+        mView.showProgress();
     }
 
     private UseCaseLoader.UseCaseLoaderCallback<Void> noteAddedLoaderCallback = new UseCaseLoader.UseCaseLoaderCallback<Void>() {
@@ -65,7 +67,6 @@ public class NewNotePresenter extends BasePresenter<AddNewNoteContract> {
 
         @Override
         public UseCaseLoader<Void> onCreateUseCaseLoader(Bundle args) {
-            mView.showProgress();
             return new UseCaseLoader<>(App.getAddNoteUseCase(mFa, note));
         }
     };

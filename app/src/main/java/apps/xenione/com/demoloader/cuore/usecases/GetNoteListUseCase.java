@@ -9,11 +9,11 @@ import apps.xenione.com.demoloader.cuore.NoteRepository;
 /**
  * Created by Eugeni on 24/04/2016.
  */
-public class GetNoteUseCase implements Callable<List<Note>> {
+public class GetNoteListUseCase implements Callable<List<Note>> {
 
     private NoteRepository mNoteRepository;
 
-    public GetNoteUseCase(NoteRepository noteRepository) {
+    public GetNoteListUseCase(NoteRepository noteRepository) {
         mNoteRepository = noteRepository;
     }
 
