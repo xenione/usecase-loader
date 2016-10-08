@@ -8,6 +8,7 @@ import android.support.v4.app.LoaderManager;
 
 import apps.xenione.com.demoloader.cuore.Note;
 import apps.xenione.com.demoloader.cuore.NoteRepository;
+import apps.xenione.com.demoloader.cuore.NoteRepositoryImpl;
 import apps.xenione.com.demoloader.cuore.usecases.AddNoteUseCase;
 import apps.xenione.com.demoloader.cuore.usecases.GetNoteListUseCase;
 
@@ -21,7 +22,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mNoteRepository = new NoteRepository();
+        mNoteRepository = new NoteRepositoryImpl();
     }
 
     public static NoteRepository getNoteRepository(Context context) {
