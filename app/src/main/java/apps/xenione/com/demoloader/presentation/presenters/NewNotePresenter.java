@@ -1,14 +1,11 @@
 package apps.xenione.com.demoloader.presentation.presenters;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
-import apps.xenione.com.demoloader.cuore.Note;
 import apps.xenione.com.demoloader.infrastructure.loaders.UseCaseLoader;
 import apps.xenione.com.demoloader.infrastructure.presenters.BasePresenter;
-import apps.xenione.com.demoloader.presentation.App;
 import apps.xenione.com.demoloader.presentation.view.contracts.AddNewNoteContract;
 
 /**
@@ -19,12 +16,10 @@ public class NewNotePresenter extends BasePresenter<AddNewNoteContract> {
     public static final int ADD_NEW_NOTE_LOADER_ID = 102;
 
     private LoaderManager mLoaderManager;
-    private FragmentActivity mFa;
-    private Note note;
+    private Runnable mTask;
 
-    public NewNotePresenter(FragmentActivity fa) {
-        mFa = fa;
-        mLoaderManager = App.getLoaderManager(fa);
+    public NewNotePresenter(LoaderManager loaderManager) {
+        mLoaderManager = loaderManager;
     }
 
     public void init() {
@@ -47,8 +42,8 @@ public class NewNotePresenter extends BasePresenter<AddNewNoteContract> {
         }
     }
 
-    public void save(Note note) {
-        this.note = note;
+    public void execute(Runnable task) {
+        mTask = task;
         mLoaderManager.restartLoader(ADD_NEW_NOTE_LOADER_ID, null, noteAddedLoaderCallback);
         mView.showProgress();
     }
@@ -67,7 +62,7 @@ public class NewNotePresenter extends BasePresenter<AddNewNoteContract> {
 
         @Override
         public UseCaseLoader<Void> onCreateUseCaseLoader(Bundle args) {
-            return new UseCaseLoader<>(App.getAddNoteUseCase(mFa, note));
+            return new UseCaseLoader<>(mTask);
         }
     };
 }

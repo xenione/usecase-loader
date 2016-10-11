@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import apps.xenione.com.demoloader.R;
+import apps.xenione.com.demoloader.presentation.App;
 import apps.xenione.com.demoloader.presentation.adapters.NoteAdapter;
 import apps.xenione.com.demoloader.presentation.presenters.NoteListPresenter;
 import apps.xenione.com.demoloader.presentation.view.contracts.NoteListContract;
@@ -70,9 +71,9 @@ public class NoteListFragment extends Fragment implements NoteListContract {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter = new NoteListPresenter(getActivity());
-        presenter.attach(this);
-        presenter.init();
+        presenter = new NoteListPresenter(App.getLoaderManager(getActivity()));
+        presenter.bind(this);
+        presenter.execute(App.getGetNoteUseCase(getActivity()));
     }
 
     @Override
@@ -120,6 +121,6 @@ public class NoteListFragment extends Fragment implements NoteListContract {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        presenter.detach(this);
+        presenter.unbind();
     }
 }

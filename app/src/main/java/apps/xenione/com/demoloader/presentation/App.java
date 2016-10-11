@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import apps.xenione.com.demoloader.cuore.Note;
 import apps.xenione.com.demoloader.cuore.NoteRepository;
 import apps.xenione.com.demoloader.cuore.NoteRepositoryImpl;
@@ -22,6 +24,12 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
         mNoteRepository = new NoteRepositoryImpl();
     }
 

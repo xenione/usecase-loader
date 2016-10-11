@@ -7,14 +7,11 @@ public class BasePresenter<V> {
 
     protected V mView;
 
-    public void attach(V view) {
+    public void bind(V view) {
         mView = view;
     }
 
-    public void detach(V view) {
-        if (view != mView) {
-            return;
-        }
+    public void unbind() {
         mView = null;
     }
 }

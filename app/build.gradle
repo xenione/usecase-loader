@@ -33,4 +33,8 @@ dependencies {
     androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+    // LeakCanary dependencies
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }
