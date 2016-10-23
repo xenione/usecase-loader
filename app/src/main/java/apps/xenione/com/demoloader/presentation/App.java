@@ -2,6 +2,7 @@ package apps.xenione.com.demoloader.presentation;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
@@ -39,6 +40,10 @@ public class App extends Application {
 
     public static LoaderManager getLoaderManager(FragmentActivity activity) {
         return activity.getSupportLoaderManager();
+    }
+
+    public static LoaderManager getLoaderManager(Fragment fragment) {
+        return fragment.getLoaderManager();
     }
 
     public static FragmentManager getFragmentManager(FragmentActivity activity) {

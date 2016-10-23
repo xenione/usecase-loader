@@ -71,7 +71,7 @@ public class NoteListFragment extends Fragment implements NoteListContract {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter = new NoteListPresenter(App.getLoaderManager(getActivity()));
+        presenter = new NoteListPresenter(App.getLoaderManager(this));
         presenter.bind(this);
         presenter.execute(App.getGetNoteUseCase(getActivity()));
     }

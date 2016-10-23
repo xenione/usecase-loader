@@ -83,7 +83,7 @@ public class AddNewNoteDialog extends DialogFragment implements AddNewNoteContra
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter = new NewNotePresenter(App.getLoaderManager(getActivity()));
+        presenter = new NewNotePresenter(App.getLoaderManager(this));
         presenter.bind(this);
         presenter.init();
     }
