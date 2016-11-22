@@ -51,8 +51,6 @@ If *Loader* was previously created, it will be updated with new **LoaderCallback
 
 Place **initLoaders** **onActivityCreated()** Fragment Or OnCreate() Activity. 
 
-Keep in mind that loader is in the activity scope.
-
-So If I add a Fragment and this last one initializes a **Loader**, for the first time, the **Loader** will be created. When I remove the fragment, and after that, I add a new instance of the same fragment into the same activity, the previous **Loader** should be reused no new should be created. So no **OnCreateLoader** callback will be called instead previous loaded data will be dispatched through **onLoadFinished()**.
+Keep in mind that loader is in the activity or fragment scope.
 
 You can destroy loaders calling **destroyLoader()**, alternatively, just cancel task invoke **cancelLoader()**.
