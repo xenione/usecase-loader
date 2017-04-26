@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_container"
+    android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".example.presentation.activity.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="apps.xenione.com.demoloader.presentation.notes.NoteActivity">
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="apps.xenione.com.demoloader.presentation.view.fragments.NoteListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center" />
-</FrameLayout>
+</RelativeLayout>
