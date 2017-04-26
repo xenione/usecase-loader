@@ -107,6 +107,16 @@ public class NoContext extends Context {
     }
 
     @Override
+    public boolean moveSharedPreferencesFrom(Context sourceContext, String name) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteSharedPreferences(String name) {
+        return false;
+    }
+
+    @Override
     public FileInputStream openFileInput(String name) throws FileNotFoundException {
         return null;
     }
@@ -123,6 +133,11 @@ public class NoContext extends Context {
 
     @Override
     public File getFileStreamPath(String name) {
+        return null;
+    }
+
+    @Override
+    public File getDataDir() {
         return null;
     }
 
@@ -201,6 +216,11 @@ public class NoContext extends Context {
     @Override
     public SQLiteDatabase openOrCreateDatabase(String name, int mode, SQLiteDatabase.CursorFactory factory, DatabaseErrorHandler errorHandler) {
         return null;
+    }
+
+    @Override
+    public boolean moveDatabaseFrom(Context sourceContext, String name) {
+        return false;
     }
 
     @Override
@@ -403,22 +423,22 @@ public class NoContext extends Context {
 
     @Override
     public int checkPermission(String permission, int pid, int uid) {
-        return 0;
+        return PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
     public int checkCallingPermission(String permission) {
-        return 0;
+        return PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
     public int checkCallingOrSelfPermission(String permission) {
-        return 0;
+        return PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
     public int checkSelfPermission(String permission) {
-        return 0;
+        return PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -499,5 +519,15 @@ public class NoContext extends Context {
     @Override
     public Context createDisplayContext(Display display) {
         return null;
+    }
+
+    @Override
+    public Context createDeviceProtectedStorageContext() {
+        return null;
+    }
+
+    @Override
+    public boolean isDeviceProtectedStorage() {
+        return false;
     }
 }
