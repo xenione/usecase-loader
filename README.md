@@ -51,6 +51,6 @@ If *Loader* was previously created, it will be updated with new **LoaderCallback
 
 Place **initLoaders** **onActivityCreated()** Fragment Or OnCreate() Activity. 
 
-Keep in mind that loader is in the activity or fragment scope.
+Keep in mind that loader is in the activity scope.
 
 You can destroy loaders calling **destroyLoader()**, alternatively, just cancel task invoke **cancelLoader()**.
