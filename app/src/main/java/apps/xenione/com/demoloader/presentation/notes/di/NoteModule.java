@@ -3,7 +3,7 @@ package apps.xenione.com.demoloader.presentation.notes.di;
 import android.app.Activity;
 
 import apps.xenione.com.demoloader.data.NoteRepository;
-import apps.xenione.com.demoloader.data.source.in_memory.di.InMemoryNoteDataModule;
+import apps.xenione.com.demoloader.data.di.DataModule;
 import apps.xenione.com.demoloader.presentation.notes.Navigation;
 import apps.xenione.com.demoloader.presentation.notes.notedetail.NoteDetailContract;
 import apps.xenione.com.demoloader.presentation.notes.notedetail.NoteDetailPresenter;
@@ -14,7 +14,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @NoteScope
-@Module(includes = InMemoryNoteDataModule.class)
+@Module(includes = DataModule.class)
 public class NoteModule {
 
     private Activity mActivity;

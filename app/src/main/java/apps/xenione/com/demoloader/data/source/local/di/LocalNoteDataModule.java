@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import apps.xenione.com.demoloader.data.Note;
-import apps.xenione.com.demoloader.data.NoteRepository;
 import apps.xenione.com.demoloader.data.source.DataSource;
 import apps.xenione.com.demoloader.data.source.NoteMapper;
 import apps.xenione.com.demoloader.data.source.local.LocalNoteDataSource;
@@ -42,11 +41,6 @@ public class LocalNoteDataModule {
     @Provides
     public DataSource<Note> providesLocalNoteDataSource(SharedPreferences shPreferences, NoteMapper<String> noteMapper) {
         return new LocalNoteDataSource(shPreferences, noteMapper);
-    }
-
-    @Provides
-    NoteRepository providesNoteRepository(DataSource<Note> dataSource) {
-        return new NoteRepository.Impl(dataSource);
     }
 
 }
