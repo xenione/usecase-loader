@@ -22,6 +22,7 @@ import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.data.Note;
 import apps.xenione.com.demoloader.presentation.BaseFragment;
 import apps.xenione.com.demoloader.presentation.notes.Navigation;
+import apps.xenione.com.demoloader.presentation.notes.notelist.di.NoteListModule;
 import apps.xenione.com.demoloader.presentation.view.Notifier;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +63,7 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        getNoteComponent().inject(this);
+        getNoteComponent().plus(new NoteListModule()).inject(this);
     }
 
     @Nullable

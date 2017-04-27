@@ -40,7 +40,7 @@ public class NoteDetailFragment extends BaseFragment implements NoteDetailContra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getNoteComponent().inject(this);
+        //getNoteComponent().inject(this);
     }
 
     @Nullable
@@ -57,14 +57,14 @@ public class NoteDetailFragment extends BaseFragment implements NoteDetailContra
     }
 
     private void initViews() {
-        mPresenter.setView(this);
-        mPresenter.fetchUsers(getUUID());
+      //  mPresenter.setView(this);
+      //  mPresenter.fetchUsers(getUUID());
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPresenter.setView(null);
+     //   mPresenter.setView(null);
     }
 
     @Override

@@ -1,15 +1,19 @@
 package apps.xenione.com.demoloader.presentation.notes.di;
 
-import apps.xenione.com.demoloader.presentation.notes.notedetail.NoteDetailFragment;
-import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListFragment;
+import android.content.Context;
+
+import apps.xenione.com.demoloader.presentation.notes.notelist.di.NoteListComponent;
+import apps.xenione.com.demoloader.presentation.notes.notelist.di.NoteListModule;
 import dagger.Subcomponent;
 
 @NoteScope
 @Subcomponent(modules = NoteModule.class)
 public interface NoteComponent {
 
-    void inject(NoteListFragment fragment);
+    NoteListComponent plus(NoteListModule module);
 
-    void inject(NoteDetailFragment fragment);
+   // void inject(NoteDetailFragment fragment);
+
+    Context context();
 
 }
