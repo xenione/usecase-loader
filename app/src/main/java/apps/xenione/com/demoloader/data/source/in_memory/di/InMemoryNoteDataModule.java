@@ -1,6 +1,5 @@
 package apps.xenione.com.demoloader.data.source.in_memory.di;
 
-import apps.xenione.com.demoloader.data.NoteRepository;
 import apps.xenione.com.demoloader.data.di.DataModule;
 import apps.xenione.com.demoloader.data.source.in_memory.InMemoryNoteDataSource;
 import dagger.Module;
@@ -8,7 +7,7 @@ import dagger.Provides;
 
 
 @Module
-public class InMemoryNoteDataModule implements DataModule<InMemoryNoteDataSource> {
+public class InMemoryNoteDataModule extends DataModule<InMemoryNoteDataSource> {
 
     public InMemoryNoteDataModule() {
     }
@@ -18,9 +17,5 @@ public class InMemoryNoteDataModule implements DataModule<InMemoryNoteDataSource
         return new InMemoryNoteDataSource();
     }
 
-    @Provides
-    @Override
-    public NoteRepository providesNoteRepository(InMemoryNoteDataSource dataSource) {
-        return new NoteRepository.Impl(dataSource);
-    }
+
 }

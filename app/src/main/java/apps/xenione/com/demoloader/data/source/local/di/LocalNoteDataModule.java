@@ -6,8 +6,9 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import apps.xenione.com.demoloader.data.NoteRepository;
+import apps.xenione.com.demoloader.data.Note;
 import apps.xenione.com.demoloader.data.di.DataModule;
+import apps.xenione.com.demoloader.data.source.DataSource;
 import apps.xenione.com.demoloader.data.source.NoteMapper;
 import apps.xenione.com.demoloader.data.source.local.LocalNoteDataSource;
 import apps.xenione.com.demoloader.data.source.local.LocalNoteMapper;
@@ -16,7 +17,7 @@ import dagger.Provides;
 
 
 @Module
-public class LocalNoteDataModule implements DataModule<LocalNoteDataSource> {
+public class LocalNoteDataModule extends DataModule<LocalNoteDataSource> {
 
     public LocalNoteDataModule() {
     }
@@ -39,12 +40,8 @@ public class LocalNoteDataModule implements DataModule<LocalNoteDataSource> {
     }
 
     @Provides
-    public LocalNoteDataSource providesLocalNoteDataSource(SharedPreferences shPreferences, NoteMapper<String> noteMapper) {
+    public DataSource<Note> providesLocalNoteDataSource(SharedPreferences shPreferences, NoteMapper<String> noteMapper) {
         return new LocalNoteDataSource(shPreferences, noteMapper);
     }
 
-    @Override
-    public NoteRepository providesNoteRepository(LocalNoteDataSource dataSource) {
-        return new NoteRepository.Impl(dataSource);
-    }
 }

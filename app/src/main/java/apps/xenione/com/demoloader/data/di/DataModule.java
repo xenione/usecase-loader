@@ -19,10 +19,14 @@ limitations under the License.
 import apps.xenione.com.demoloader.data.Note;
 import apps.xenione.com.demoloader.data.NoteRepository;
 import apps.xenione.com.demoloader.data.source.DataSource;
+import dagger.Module;
+import dagger.Provides;
 
+@Module
+public abstract class DataModule<T extends DataSource<Note>> {
 
-public interface DataModule<T extends DataSource<Note>> {
-
-    NoteRepository providesNoteRepository(T dataSource);
-
+    @Provides
+    NoteRepository providesNoteRepository(T dataSource) {
+        return new NoteRepository.Impl(dataSource);
+    }
 }
