@@ -10,6 +10,7 @@ import apps.xenione.com.demoloader.App;
 import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.presentation.di.AppComponent;
 import apps.xenione.com.demoloader.presentation.notes.di.NoteComponent;
+import apps.xenione.com.demoloader.presentation.notes.di.NoteModule;
 import apps.xenione.com.demoloader.presentation.notes.notedetail.NoteDetailFragment;
 import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListFragment;
 
@@ -37,7 +38,7 @@ public class NoteActivity extends AppCompatActivity implements Navigation {
     }
 
     public void createUserComponent() {
-        //mNoteComponent = getAppComponent().plus(new NoteModule(this));
+        mNoteComponent = getAppComponent().plus(new NoteModule(this));
     }
 
     public NoteComponent getNoteComponent() {

@@ -62,7 +62,7 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      //  getNoteComponent().inject(this);
+        getNoteComponent().inject(this);
     }
 
     @Nullable
@@ -77,7 +77,7 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-      //  mPresenter.start();
+        mPresenter.start();
     }
 
     private void initViews() {
@@ -91,7 +91,7 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
 
         mListView.addItemDecoration(dividerItemDecoration);
 
-        //mPresenter.setView(this);
+        mPresenter.setView(this);
 
         mNoteListAdapter = new NoteListAdapter(mPresenter, mNote);
         mListView.setAdapter(mNoteListAdapter);
