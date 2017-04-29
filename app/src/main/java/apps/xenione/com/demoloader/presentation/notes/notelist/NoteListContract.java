@@ -38,8 +38,6 @@ public class NoteListContract {
 
         void start();
 
-        void loadData();
-
         void setFavorite(Note note);
 
         void unsetFavorite(Note note);

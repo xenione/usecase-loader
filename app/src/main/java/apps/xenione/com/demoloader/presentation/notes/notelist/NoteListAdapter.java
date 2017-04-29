@@ -42,7 +42,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
                     mPresenter.showDetail(note);
                 }
             });
-            nameView.setText(note.getTitle());
+            nameView.setText(note.getTitle() + "\n" + note.getAuthor());
             favoriteView.setOnCheckedChangeListener(null);
             favoriteView.setChecked(note.isFavorite());
             favoriteView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

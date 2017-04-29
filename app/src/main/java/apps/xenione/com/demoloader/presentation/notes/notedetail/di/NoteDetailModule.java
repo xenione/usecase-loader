@@ -1,6 +1,10 @@
 package apps.xenione.com.demoloader.presentation.notes.notedetail.di;
 
+import apps.xenione.com.demoloader.data.NoteRepository;
+import apps.xenione.com.demoloader.presentation.notes.notedetail.NoteDetailContract;
+import apps.xenione.com.demoloader.presentation.notes.notedetail.NoteDetailPresenter;
 import dagger.Module;
+import dagger.Provides;
 
 /*
 Copyright 27/04/2017 Eugeni Josep Senent i Gabriel
@@ -19,4 +23,9 @@ limitations under the License.
 */
 @Module
 public class NoteDetailModule {
+
+    @Provides
+    NoteDetailContract.Presenter providerNoteDetailPresenter(NoteRepository noteRepository) {
+        return new NoteDetailPresenter(noteRepository);
+    }
 }

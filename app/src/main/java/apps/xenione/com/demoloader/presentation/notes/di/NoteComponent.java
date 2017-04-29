@@ -1,8 +1,9 @@
 package apps.xenione.com.demoloader.presentation.notes.di;
 
 import android.content.Context;
+import android.support.v4.app.LoaderManager;
 
-import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListContract;
+import apps.xenione.com.demoloader.data.NoteRepository;
 import apps.xenione.com.demoloader.presentation.notes.notelist.di.NoteListComponent;
 import apps.xenione.com.demoloader.presentation.notes.notelist.di.NoteListModule;
 import dagger.Subcomponent;
@@ -17,6 +18,8 @@ public interface NoteComponent {
 
     Context context();
 
-    NoteListContract.Presenter noteListPreseneter();
+    NoteRepository noteRepository();
+
+    LoaderManager loaderManager();
 
 }

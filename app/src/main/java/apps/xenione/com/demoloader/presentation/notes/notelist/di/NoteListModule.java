@@ -1,15 +1,22 @@
 package apps.xenione.com.demoloader.presentation.notes.notelist.di;
 
 import android.content.Context;
+import android.support.v4.app.LoaderManager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 import apps.xenione.com.demoloader.data.Note;
+import apps.xenione.com.demoloader.data.NoteRepository;
+import apps.xenione.com.demoloader.presentation.notes.Navigation;
 import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListAdapter;
 import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListContract;
+import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListPresenter;
+import apps.xenione.com.demoloader.presentation.use_cases.GetNotesUseCase;
 import dagger.Module;
 import dagger.Provides;
 
@@ -47,4 +54,13 @@ public class NoteListModule {
         return new NoteListAdapter(presenter, new ArrayList<Note>());
     }
 
+    @Provides
+    public Callable<List<Note>> providesGetNotesUseCase(NoteRepository repository) {
+        return new GetNotesUseCase(repository);
+    }
+
+    @Provides
+    NoteListContract.Presenter providerNoteListPresenter(LoaderManager loaderManager, Callable<List<Note>> useCase, Navigation navigation) {
+        return new NoteListPresenter(loaderManager, useCase, navigation);
+    }
 }

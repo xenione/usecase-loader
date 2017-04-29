@@ -94,6 +94,7 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        mListView.setLayoutManager(null);
         mPresenter.setView(null);
     }
 

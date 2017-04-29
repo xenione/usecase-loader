@@ -1,14 +1,10 @@
 package apps.xenione.com.demoloader.presentation.notes.di;
 
-import android.app.Activity;
+import android.support.v4.app.LoaderManager;
+import android.support.v7.app.AppCompatActivity;
 
-import apps.xenione.com.demoloader.data.NoteRepository;
 import apps.xenione.com.demoloader.data.di.DataModule;
 import apps.xenione.com.demoloader.presentation.notes.Navigation;
-import apps.xenione.com.demoloader.presentation.notes.notedetail.NoteDetailContract;
-import apps.xenione.com.demoloader.presentation.notes.notedetail.NoteDetailPresenter;
-import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListContract;
-import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListPresenter;
 import apps.xenione.com.demoloader.presentation.view.Notifier;
 import dagger.Module;
 import dagger.Provides;
@@ -17,9 +13,9 @@ import dagger.Provides;
 @Module(includes = DataModule.class)
 public class NoteModule {
 
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
 
-    public NoteModule(Activity activity) {
+    public NoteModule(AppCompatActivity activity) {
         mActivity = activity;
     }
 
@@ -35,16 +31,11 @@ public class NoteModule {
         return new Notifier(mActivity);
     }
 
-
     @NoteScope
     @Provides
-    NoteListContract.Presenter providerNoteListPresenter(NoteRepository noteRepository, Navigation navigation) {
-        return new NoteListPresenter(noteRepository, navigation);
+    LoaderManager providesLoaderManager() {
+        return mActivity.getSupportLoaderManager();
     }
 
-    @NoteScope
-    @Provides
-    NoteDetailContract.Presenter providerNoteDetailPresenter(NoteRepository noteRepository) {
-        return new NoteDetailPresenter(noteRepository);
-    }
+
 }

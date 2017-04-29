@@ -29,9 +29,23 @@ public class InMemoryNoteDataSource implements DataSource<Note> {
     static {
         notes = new ArrayList<Note>() {
             {
-                add(new Note.Builder().withId(1).build());
-                add(new Note.Builder().withId(2).build());
-                add(new Note.Builder().withId(3).build());
+                add(new Note.Builder().withId(1)
+                        .withAuthor("Eugeni Senent")
+                        .withTitle("Note 1")
+                        .withBody("this is the body's note 1")
+                        .withPublshDate(1493475098)
+                        .build());
+                add(new Note.Builder().withId(2)
+                        .withAuthor("Eugeni Senent")
+                        .withTitle("Note 2")
+                        .withBody("this is the body's note 2")
+                        .withPublshDate(1493476098)
+                        .build());
+                add(new Note.Builder().withAuthor("Eugeni Senent")
+                        .withTitle("Note 3")
+                        .withBody("this is the body's note 3")
+                        .withPublshDate(1493476998)
+                        .build());
             }
         };
     }
