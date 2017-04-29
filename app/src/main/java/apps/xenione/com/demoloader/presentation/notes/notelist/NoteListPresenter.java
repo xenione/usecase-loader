@@ -4,7 +4,7 @@ import apps.xenione.com.demoloader.data.Note;
 import apps.xenione.com.demoloader.data.NoteRepository;
 import apps.xenione.com.demoloader.presentation.notes.Navigation;
 
-public class NoteListPresenter implements NoteListContract.Presenter{
+public class NoteListPresenter implements NoteListContract.Presenter {
 
     private NoteRepository mNoteRepository;
 
@@ -28,8 +28,13 @@ public class NoteListPresenter implements NoteListContract.Presenter{
     }
 
     @Override
-    public void setFavorite(Note note, boolean b) {
+    public void setFavorite(Note note) {
         mNoteRepository.setFavorite(note);
+    }
+
+    @Override
+    public void unsetFavorite(Note note) {
+        mNoteRepository.unsetFavorite(note);
     }
 
     @Override

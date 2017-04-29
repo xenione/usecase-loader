@@ -5,15 +5,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,8 +35,8 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
     @BindView(R.id.user_list_list)
     RecyclerView mListView;
 
-    @BindView(R.id.user_list_load_more)
-    TextView mLoadMoreView;
+    @BindView(R.id.user_list_load)
+    View mLoadView;
 
     @Inject
     Navigation mNavigation;
@@ -50,14 +47,18 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
     @Inject
     NoteListContract.Presenter mPresenter;
 
-    private NoteListAdapter mNoteListAdapter;
+    @Inject
+    LinearLayoutManager mLayoutManager;
 
-    private List<Note> mNote;
+    @Inject
+    RecyclerView.ItemDecoration mItemDecoration;
+
+    @Inject
+    NoteListAdapter mNoteListAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNote = new ArrayList<>();
     }
 
     @Override
@@ -83,20 +84,11 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
 
     private void initViews() {
         mListView.setHasFixedSize(true);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        mListView.setLayoutManager(layoutManager);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(),
-                layoutManager.getOrientation());
-
-        mListView.addItemDecoration(dividerItemDecoration);
-
-        mPresenter.setView(this);
-
-        mNoteListAdapter = new NoteListAdapter(mPresenter, mNote);
+        mListView.setLayoutManager(mLayoutManager);
+        mListView.addItemDecoration(mItemDecoration);
         mListView.setAdapter(mNoteListAdapter);
 
+        mPresenter.setView(this);
     }
 
     @Override
@@ -107,12 +99,12 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
 
     @Override
     public void setLoadingIndicator(boolean active) {
-        mLoadMoreView.setText(active ? "loading" : "load more");
+        mLoadView.setVisibility(active ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void showUsers(List<Note> notes) {
-        mNoteListAdapter.setUsers(notes);
+    public void setData(List<Note> notes) {
+        mNoteListAdapter.setData(notes);
     }
 
     @Override

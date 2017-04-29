@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageView;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,29 +17,42 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.UserViewHolder> {
+public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteViewHolder> {
 
-    public static class UserViewHolder extends RecyclerView.ViewHolder {
+    public static class NoteViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.user_list_row_name)
+        @BindView(R.id.note_list_row_name)
         public TextView nameView;
 
-        @BindView(R.id.user_list_row_email)
-        public TextView emailView;
-
-        @BindView(R.id.user_list_row_delete)
-        public View deleteView;
-
-        @BindView(R.id.user_list_row_favorite)
+        @BindView(R.id.note_list_row_favorite)
         public CheckBox favoriteView;
 
-        @BindView(R.id.user_list_row_picture)
-        public ImageView pictureView;
+        private NoteListContract.Presenter mPresenter;
 
-        public UserViewHolder(View v) {
+        public NoteViewHolder(NoteListContract.Presenter presenter, View v) {
             super(v);
+            mPresenter = presenter;
             ButterKnife.bind(this, v);
         }
+
+        public void setData(final Note note) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPresenter.showDetail(note);
+                }
+            });
+            nameView.setText(note.getTitle());
+            favoriteView.setOnCheckedChangeListener(null);
+            favoriteView.setChecked(note.isFavorite());
+            favoriteView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mPresenter.setFavorite(note);
+                }
+            });
+        }
+
     }
 
     private List<Note> mNotes;
@@ -50,24 +63,23 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.UserVi
         mNotes = notes;
     }
 
-    public void setUsers(List<Note> notes) {
+    public void setData(List<Note> notes) {
         mNotes.clear();
         mNotes.addAll(notes);
         this.notifyDataSetChanged();
     }
 
     @Override
-    public NoteListAdapter.UserViewHolder onCreateViewHolder(ViewGroup parent,
-                                                             int viewType) {
+    public NoteViewHolder onCreateViewHolder(ViewGroup parent,
+                                             int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.user_list_row, parent, false);
-
-        return new UserViewHolder(v);
+                .inflate(R.layout.note_list_row, parent, false);
+        return new NoteViewHolder(mPresenter, v);
     }
 
     @Override
-    public void onBindViewHolder(UserViewHolder holder, int position) {
-        final Note user = mNotes.get(position);
+    public void onBindViewHolder(NoteViewHolder holder, int position) {
+        holder.setData(mNotes.get(position));
     }
 
     @Override

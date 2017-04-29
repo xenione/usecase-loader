@@ -5,6 +5,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import apps.xenione.com.demoloader.data.Note;
+import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListAdapter;
+import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListContract;
 import dagger.Module;
 import dagger.Provides;
 
@@ -27,14 +32,19 @@ limitations under the License.
 public class NoteListModule {
 
     @Provides
-    public RecyclerView.LayoutManager providesLayoutManager(Context context){
+    public LinearLayoutManager providesLayoutManager(Context context) {
         return new LinearLayoutManager(context);
     }
 
     @Provides
-    public RecyclerView.ItemDecoration providesItemDecorator(Context context,LinearLayoutManager linearLayoutManager){
-        return  new DividerItemDecoration(context,
+    public RecyclerView.ItemDecoration providesItemDecorator(Context context, LinearLayoutManager linearLayoutManager) {
+        return new DividerItemDecoration(context,
                 linearLayoutManager.getOrientation());
+    }
+
+    @Provides
+    public NoteListAdapter providesAdapter(NoteListContract.Presenter presenter, Context context) {
+        return new NoteListAdapter(presenter, new ArrayList<Note>());
     }
 
 }

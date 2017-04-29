@@ -25,7 +25,7 @@ public class NoteListContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showUsers(List<Note> users);
+        void setData(List<Note> notes);
 
         boolean isActive();
 
@@ -40,7 +40,9 @@ public class NoteListContract {
 
         void loadData();
 
-        void setFavorite(Note note, boolean b);
+        void setFavorite(Note note);
+
+        void unsetFavorite(Note note);
 
         void showDetail(Note note);
     }
