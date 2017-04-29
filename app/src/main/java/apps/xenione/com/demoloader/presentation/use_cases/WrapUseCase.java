@@ -1,4 +1,4 @@
-package apps.xenione.com.demoloader.infrastructure.loaders;
+package apps.xenione.com.demoloader.presentation.use_cases;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;

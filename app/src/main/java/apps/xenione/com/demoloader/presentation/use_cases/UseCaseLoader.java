@@ -1,4 +1,4 @@
-package apps.xenione.com.demoloader.infrastructure.loaders;
+package apps.xenione.com.demoloader.presentation.use_cases;
 
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
