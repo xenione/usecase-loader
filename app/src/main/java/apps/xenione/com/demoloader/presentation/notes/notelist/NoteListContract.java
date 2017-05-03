@@ -25,7 +25,9 @@ public class NoteListContract {
 
     interface View extends BaseView<Presenter> {
 
-        void setData(List<Note> notes);
+        void set(List<Note> notes);
+
+        void update(Note note);
 
         boolean isActive();
 

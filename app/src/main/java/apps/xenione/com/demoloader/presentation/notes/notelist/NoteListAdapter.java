@@ -69,6 +69,14 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
         this.notifyDataSetChanged();
     }
 
+    public void updateDate(Note note) {
+        int index = mNotes.indexOf(note);
+        if (index < 0) {
+            throw new IllegalArgumentException("Note can not be updated");
+        }
+        this.notifyItemChanged(index);
+    }
+
     @Override
     public NoteViewHolder onCreateViewHolder(ViewGroup parent,
                                              int viewType) {

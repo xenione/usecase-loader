@@ -104,8 +104,13 @@ public class NoteListFragment extends BaseFragment implements NoteListContract.V
     }
 
     @Override
-    public void setData(List<Note> notes) {
+    public void set(List<Note> notes) {
         mNoteListAdapter.setData(notes);
+    }
+
+    @Override
+    public void update(Note note) {
+        mNoteListAdapter.updateDate(note);
     }
 
     @Override

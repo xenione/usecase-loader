@@ -1,6 +1,6 @@
 package apps.xenione.com.demoloader.presentation.use_cases;
 /*
-Copyright 29/04/2017 Eugeni Josep Senent i Gabriel
+Copyright 30/04/2017 Eugeni Josep Senent i Gabriel
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,24 +15,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import apps.xenione.com.demoloader.data.Note;
-import apps.xenione.com.demoloader.data.NoteRepository;
+import java.util.concurrent.Callable;
 
-public class SetFavoriteNoteUseCase implements Runnable {
+public class UseCase<T> implements Callable<T> {
+    private Callable<T> mCallable;
 
-    private NoteRepository mRepository;
-    private Note mNote;
-
-    public SetFavoriteNoteUseCase(NoteRepository repository) {
-        mRepository = repository;
+    public UseCase(Callable<T> callable) {
+        mCallable = callable;
     }
 
-    public void set(Note note) {
-        mNote = note;
-    }
+    public void set(){}
 
     @Override
-    public void run() {
-        mRepository.setFavorite(mNote);
+    public T call() throws Exception {
+        return mCallable.call();
     }
 }
