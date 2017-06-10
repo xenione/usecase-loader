@@ -38,24 +38,6 @@ public class NoteListPresenter implements NoteListContract.Presenter {
         }
     };
 
-    private UseCaseLoader.UseCaseLoaderCallback<Note> mSeFavoriteNoteCallback = new UseCaseLoader.UseCaseLoaderCallback<Note>() {
-        @Override
-        public void onSuccess(Note note) {
-            mView.update(note);
-            mView.setLoadingIndicator(false);
-        }
-
-        @Override
-        public void onFailure(Exception e) {
-            mView.showError("fail load notes, try later");
-        }
-
-        @Override
-        public UseCaseLoader<Note> onCreateUseCaseLoader(Bundle args) {
-            return new UseCaseLoader<>(mGetNoteUseCase);
-        }
-    };
-
     public NoteListPresenter(LoaderManager loaderManager, Callable<List<Note>> useCase, Navigation navigation) {
         mLoaderManager = loaderManager;
         mGetNoteUseCase = useCase;
@@ -65,19 +47,6 @@ public class NoteListPresenter implements NoteListContract.Presenter {
     @Override
     public void start() {
         mLoaderManager.initLoader(100, null, mGetNotesCallback);
-        if (mLoaderManager.getLoader(101) != null) {
-            mLoaderManager.initLoader(101, null, mSeFavoriteNoteCallback);
-        }
-    }
-
-    @Override
-    public void setFavorite(Note note) {
-        mLoaderManager.initLoader(101, null, mSeFavoriteNoteCallback);
-    }
-
-    @Override
-    public void unsetFavorite(Note note) {
-
     }
 
     @Override

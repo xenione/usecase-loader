@@ -8,10 +8,6 @@ import java.util.concurrent.Executors;
  */
 public class WrapUseCase<T> implements Callable<T> {
 
-    public static <T> Callable<T> wrap(Callable<T> callable) {
-        return new WrapUseCase<>(callable);
-    }
-
     public static Callable<Object> wrap(Runnable runnable) {
         return new WrapUseCase<>(runnable);
     }

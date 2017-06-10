@@ -10,7 +10,7 @@ Sometimes we need to execute a piece of code in a separate thread to avoid to bl
 
 ## Why:
 
-During recreation “Activity/Fragment” as when orientation screen occurs. The old Activity instance is destroyed and the new one is created instead, but unfortunately the **AsyncTask** keeps the previous one reference (the old instance activity) so **GC** (garbage collector) cannot free memory heap up since that old instance Activity is still referenced (this is known as leak memory). It also drives a bad performance because callbacks will take place in the old “Activity/Fragment” instance and not in the new one. It may cause a NullPointerException if the hierarchy of views has been destroyed and **AsyncTask** tries to update UI.
+During recreation “Activity/Fragment” as when orientation screen occurs. The old Activity instance is destroyed and the new one is created instead, but unfortunately the **AsyncTask** keeps the previous one reference (the old instance activity) so **GC** (garbage collector) cannot free memory heap up since that old instance Activity is still referenced (this is known as leak memory). It also drives a bad performance because callbacks will take place in the old “Activity/Fragment” instance and not in the new one.
 
 Workarounds like to cancel task and execute it again and update the new instance “Activity/Fragment” reference keeps away from leak memory. However, it means that we have to discard the previous task and execute it again. In case we can discard tasks, in most cases, tasks can not be canceled only the callbacks are canceled so that it can drive into a possible duplicated execution task. Anyway, in the best case, it drives into a bad performance. Why should it cancels a task just because device configuration changed (f.i. when I rotate the device).
 
@@ -47,7 +47,7 @@ if loader has not been created before,  **onCreateLoader** callback will be call
 
 If *Loader* was previously created, it will be updated with new **LoaderCallback** implementation and will be triggered **onLoadFinished()** callback with previous data loaded, even if the task was executing recreation meanwhile Activity/Fragment took place .
 
-**Loaders** keep state during activity/fragment recreation, so if previous data was loaded, no reload needed. If you want to force load You can force loader calling **restartLoader() **it discard old data and reload again.
+**Loaders** keep state during activity/fragment recreation, so if previous data was loaded, no reload needed. If you want to force load You can force loader calling **restartLoader()** it discard old data and reload again.
 
 Place **initLoaders** **onActivityCreated()** Fragment Or OnCreate() Activity. 
 

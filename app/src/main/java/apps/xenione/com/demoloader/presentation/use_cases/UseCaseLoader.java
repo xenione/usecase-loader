@@ -22,7 +22,7 @@ public class UseCaseLoader<T> extends AsyncTaskLoader<UseCaseLoader.LoaderUseCas
 
     public UseCaseLoader(Callable<T> callable) {
         super(new NoContext());
-        this.callable = WrapUseCase.wrap(callable);
+        this.callable = callable;
     }
 
     @Override

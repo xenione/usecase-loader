@@ -40,10 +40,6 @@ public class NoteListContract {
 
         void start();
 
-        void setFavorite(Note note);
-
-        void unsetFavorite(Note note);
-
         void showDetail(Note note);
     }
 }
