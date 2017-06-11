@@ -30,6 +30,10 @@ dependencies {
     // add mockito dependencies
     testCompile "org.mockito:mockito-core:2.7.21"
 
+    // espresso dependencies
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+
     // add retrofit dependencies
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'

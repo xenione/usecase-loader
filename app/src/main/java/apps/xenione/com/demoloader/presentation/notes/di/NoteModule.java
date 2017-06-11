@@ -36,6 +36,4 @@ public class NoteModule {
     LoaderManager providesLoaderManager() {
         return mActivity.getSupportLoaderManager();
     }
-
-
 }

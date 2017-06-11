@@ -33,18 +33,37 @@ public class InMemoryNoteDataSource implements DataSource<Note> {
                         .withAuthor("Eugeni Senent")
                         .withTitle("Note 1")
                         .withBody("this is the body's note 1")
-                        .withPublshDate(1493475098)
+                        .withPublishDate(1493475098)
                         .build());
                 add(new Note.Builder().withId(2)
                         .withAuthor("Eugeni Senent")
                         .withTitle("Note 2")
                         .withBody("this is the body's note 2")
-                        .withPublshDate(1493476098)
+                        .withPublishDate(1493476098)
                         .build());
-                add(new Note.Builder().withAuthor("Eugeni Senent")
+                add(new Note.Builder().withId(3)
+                        .withAuthor("Eugeni Senent")
                         .withTitle("Note 3")
                         .withBody("this is the body's note 3")
-                        .withPublshDate(1493476998)
+                        .withPublishDate(1493476998)
+                        .build());
+                add(new Note.Builder().withId(4)
+                        .withAuthor("Eugeni Senent")
+                        .withTitle("Note 4")
+                        .withBody("this is the body's note 3")
+                        .withPublishDate(1493476998)
+                        .build());
+                add(new Note.Builder().withId(5)
+                        .withAuthor("Eugeni Senent")
+                        .withTitle("Note 5")
+                        .withBody("this is the body's note 3")
+                        .withPublishDate(1493476998)
+                        .build());
+                add(new Note.Builder().withId(6)
+                        .withAuthor("Eugeni Senent")
+                        .withTitle("Note 6")
+                        .withBody("this is the body's note 3")
+                        .withPublishDate(1493476998)
                         .build());
             }
         };

@@ -3,19 +3,19 @@ package apps.xenione.com.demoloader.data;
 
 public class Note {
 
-    int mId;
+    private int mId;
 
-    String mTitle;
+    private String mTitle;
 
-    String mShortDescription;
+    private String mShortDescription;
 
-    String mBody;
+    private String mBody;
 
-    String mAuthor;
+    private String mAuthor;
 
-    long mPublishDate;
+    private long mPublishDate;
 
-    boolean mFavorite;
+    private boolean mFavorite;
 
     private Note(Builder builder) {
         mId = builder.mId;
@@ -24,7 +24,7 @@ public class Note {
         mBody = builder.mBody;
         mAuthor = builder.mAuthor;
         mPublishDate = builder.mPublishDate;
-        mFavorite = false;
+        mFavorite = builder.mFavorite;
     }
 
     public int getId() {
@@ -35,26 +35,49 @@ public class Note {
         return mTitle;
     }
 
+    void setTitle(String title) {
+        mTitle = title;
+    }
+
     public String getShortDescription() {
         return mShortDescription;
+    }
+
+    void setShortDescription(String shortDescription) {
+        mShortDescription = shortDescription;
     }
 
     public String getBody() {
         return mBody;
     }
 
+    void setBody(String body) {
+        mBody = body;
+    }
+
     public String getAuthor() {
         return mAuthor;
+    }
+
+    void setAuthor(String author) {
+        mAuthor = author;
     }
 
     public long getPublishDate() {
         return mPublishDate;
     }
 
+    void setPublishDate(int date) {
+        mPublishDate = date;
+    }
+
     public boolean isFavorite() {
         return mFavorite;
     }
 
+    void setFavorite(boolean favorite) {
+        mFavorite = favorite;
+    }
 
     public static class Builder {
 
@@ -70,7 +93,7 @@ public class Note {
 
         private long mPublishDate;
 
-        private boolean mFavorite;
+        private boolean mFavorite = false;
 
 
         public Builder withId(int id) {
@@ -98,8 +121,13 @@ public class Note {
             return this;
         }
 
-        public Builder withPublshDate(long publishDate) {
+        public Builder withPublishDate(long publishDate) {
             this.mPublishDate = publishDate;
+            return this;
+        }
+
+        public Builder withFavorite(boolean favorite) {
+            this.mFavorite = favorite;
             return this;
         }
 

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import apps.xenione.com.demoloader.data.Note;
 import apps.xenione.com.demoloader.data.NoteRepository;
@@ -16,7 +15,12 @@ import apps.xenione.com.demoloader.presentation.notes.Navigation;
 import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListAdapter;
 import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListContract;
 import apps.xenione.com.demoloader.presentation.notes.notelist.NoteListPresenter;
+import apps.xenione.com.demoloader.presentation.notes.notelist.note_item.ItemViewHolderFactory;
+import apps.xenione.com.demoloader.presentation.notes.notelist.note_item.NoteItemContract;
+import apps.xenione.com.demoloader.presentation.notes.notelist.note_item.NoteItemPresenter;
 import apps.xenione.com.demoloader.presentation.use_cases.GetNotesUseCase;
+import apps.xenione.com.demoloader.presentation.use_cases.SetFavoriteNotesUseCase;
+import apps.xenione.com.demoloader.presentation.use_cases.UseCase;
 import dagger.Module;
 import dagger.Provides;
 
@@ -50,17 +54,32 @@ public class NoteListModule {
     }
 
     @Provides
-    public NoteListAdapter providesAdapter(NoteListContract.Presenter presenter, Context context) {
-        return new NoteListAdapter(presenter, new ArrayList<Note>());
+    public NoteListAdapter providesAdapter(ItemViewHolderFactory factory) {
+        return new NoteListAdapter(factory, new ArrayList<Note>());
     }
 
     @Provides
-    public Callable<List<Note>> providesGetNotesUseCase(NoteRepository repository) {
+    public ItemViewHolderFactory providesItemView(NoteItemContract.Presenter presenter) {
+        return new ItemViewHolderFactory.Impl(presenter);
+    }
+
+    @Provides
+    public UseCase<Void, List<Note>> providesGetNotesUseCase(NoteRepository repository) {
         return new GetNotesUseCase(repository);
     }
 
     @Provides
-    NoteListContract.Presenter providerNoteListPresenter(LoaderManager loaderManager, Callable<List<Note>> useCase, Navigation navigation) {
+    public UseCase<SetFavoriteNotesUseCase.SetFavoriteInput, Void> providesSetFavoriteNoteUseCase(NoteRepository repository) {
+        return new SetFavoriteNotesUseCase(repository);
+    }
+
+    @Provides
+    NoteListContract.Presenter providerNoteListPresenter(LoaderManager loaderManager, UseCase<Void, List<Note>> useCase, Navigation navigation) {
         return new NoteListPresenter(loaderManager, useCase, navigation);
+    }
+
+    @Provides
+    NoteItemContract.Presenter providerNoteItemPresenter(LoaderManager loaderManager,UseCase<SetFavoriteNotesUseCase.SetFavoriteInput, Void> useCase) {
+        return new NoteItemPresenter(loaderManager, useCase);
     }
 }

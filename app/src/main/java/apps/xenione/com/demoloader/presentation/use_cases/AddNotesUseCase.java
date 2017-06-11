@@ -15,42 +15,52 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import java.util.List;
-
 import apps.xenione.com.demoloader.data.Note;
+import apps.xenione.com.demoloader.data.Note.Builder;
 import apps.xenione.com.demoloader.data.NoteRepository;
 
-public class GetNotesUseCase extends UseCase<Void,List<Note>> {
+public class AddNotesUseCase extends UseCase<Note, Void> {
 
     private NoteRepository mRepository;
+    Note mNote;
 
-    public GetNotesUseCase(NoteRepository repository) {
+    public AddNotesUseCase(NoteRepository repository) {
         mRepository = repository;
     }
 
     @Override
-    public List<Note> call() throws Exception {
-        return mRepository.getAll();
+    public Void call() throws Exception {
+        mRepository.save(mNote);
+        return null;
     }
 
     @Override
-    public GetNotesParamBuilder getParamBuilder() {
-        return new GetNotesParamBuilder(this);
+    public NoteParamBuilder getParamBuilder() {
+        return new NoteParamBuilder(this);
     }
 
-    public static class GetNotesParamBuilder extends ParamBuilder<Void> {
+    public static class NoteParamBuilder extends ParamBuilder<Note> {
 
-        public GetNotesParamBuilder(UseCase<Void, ?> useCase) {
+        private String mBody;
+        private String mTitle;
+
+        NoteParamBuilder(AddNotesUseCase useCase) {
             super(useCase);
         }
 
-        public GetNotesParamBuilder withNothing(){
+        public NoteParamBuilder withBody(String body) {
+            this.mBody = body;
+            return this;
+        }
+
+        public NoteParamBuilder WithTitle(String title) {
+            this.mTitle = title;
             return this;
         }
 
         @Override
-        protected Void buildParams() {
-            return null;
+        protected Note buildParams() {
+            return new Builder().withBody(mBody).withTitle(mTitle).build();
         }
     }
 }

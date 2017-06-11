@@ -2,64 +2,22 @@ package apps.xenione.com.demoloader.presentation.notes.notelist;
 
 
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
 
 import java.util.List;
 
-import apps.xenione.com.demoloader.R;
 import apps.xenione.com.demoloader.data.Note;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import apps.xenione.com.demoloader.presentation.notes.notelist.note_item.ItemViewHolderFactory;
+import apps.xenione.com.demoloader.presentation.notes.notelist.note_item.NoteItemContract;
 
 
-public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteViewHolder> {
-
-    public static class NoteViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.note_list_row_name)
-        public TextView nameView;
-
-        @BindView(R.id.note_list_row_favorite)
-        public CheckBox favoriteView;
-
-        private NoteListContract.Presenter mPresenter;
-
-        public NoteViewHolder(NoteListContract.Presenter presenter, View v) {
-            super(v);
-            mPresenter = presenter;
-            ButterKnife.bind(this, v);
-        }
-
-        public void setData(final Note note) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mPresenter.showDetail(note);
-                }
-            });
-            nameView.setText(note.getTitle() + "\n" + note.getAuthor());
-            favoriteView.setOnCheckedChangeListener(null);
-            favoriteView.setChecked(note.isFavorite());
-            favoriteView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    mPresenter.setFavorite(note);
-                }
-            });
-        }
-
-    }
+public class NoteListAdapter extends RecyclerView.Adapter<NoteItemContract.View> {
 
     private List<Note> mNotes;
-    private NoteListContract.Presenter mPresenter;
+    private ItemViewHolderFactory mFactory;
 
-    public NoteListAdapter(NoteListContract.Presenter presenter, List<Note> notes) {
-        mPresenter = presenter;
+    public NoteListAdapter(ItemViewHolderFactory factory, List<Note> notes) {
+        mFactory = factory;
         mNotes = notes;
     }
 
@@ -78,16 +36,13 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
     }
 
     @Override
-    public NoteViewHolder onCreateViewHolder(ViewGroup parent,
-                                             int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.note_list_row, parent, false);
-        return new NoteViewHolder(mPresenter, v);
+    public NoteItemContract.View onCreateViewHolder(ViewGroup parent, int viewType) {
+        return mFactory.make(parent, this);
     }
 
     @Override
-    public void onBindViewHolder(NoteViewHolder holder, int position) {
-        holder.setData(mNotes.get(position));
+    public void onBindViewHolder(NoteItemContract.View holder, int position) {
+        holder.set(mNotes.get(position));
     }
 
     @Override

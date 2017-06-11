@@ -4,15 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import apps.xenione.com.demoloader.data.Note;
 import apps.xenione.com.demoloader.presentation.notes.Navigation;
+import apps.xenione.com.demoloader.presentation.use_cases.UseCase;
 import apps.xenione.com.demoloader.presentation.use_cases.UseCaseLoader;
 
 public class NoteListPresenter implements NoteListContract.Presenter {
 
-    private Callable<List<Note>> mGetNoteUseCase;
+    private UseCase<Void, List<Note>> mGetNoteUseCase;
 
     private Navigation mNavigation;
 
@@ -38,7 +38,7 @@ public class NoteListPresenter implements NoteListContract.Presenter {
         }
     };
 
-    public NoteListPresenter(LoaderManager loaderManager, Callable<List<Note>> useCase, Navigation navigation) {
+    public NoteListPresenter(LoaderManager loaderManager, UseCase<Void, List<Note>> useCase, Navigation navigation) {
         mLoaderManager = loaderManager;
         mGetNoteUseCase = useCase;
         mNavigation = navigation;

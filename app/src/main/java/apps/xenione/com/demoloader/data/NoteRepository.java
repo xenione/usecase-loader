@@ -1,19 +1,15 @@
 package apps.xenione.com.demoloader.data;
 
 
-import android.util.SparseArray;
-
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import apps.xenione.com.demoloader.data.source.DataSource;
 
-public interface NoteRepository {
-
-    boolean setFavorite(Note note);
-
-    boolean unsetFavorite(Note note);
+public interface NoteRepository extends DataSource<Note> {
 
     List<Note> getAll();
 
@@ -21,11 +17,15 @@ public interface NoteRepository {
 
     List<Note> getByTitle(String title);
 
+    boolean setFavorite(Note note);
+
+    boolean unsetFavorite(Note note);
+
     class Impl implements NoteRepository {
 
         private DataSource<Note> mDataSource;
 
-        private SparseArray<Note> mCache = new SparseArray<>();
+        private Map<Integer, Note> mCache = new HashMap<>();
 
         public Impl(DataSource<Note> dataSource) {
             mDataSource = dataSource;
@@ -43,11 +43,23 @@ public interface NoteRepository {
         @Override
         public List<Note> getAll() {
             loadDataIfNeeded();
-            List<Note> notes = new ArrayList<>(mCache.size());
-            for (int i = 0; i < mCache.size(); i++) {
-                notes.add(mCache.valueAt(i));
-            }
-            return Collections.unmodifiableList(notes);
+            return Collections.unmodifiableList(new ArrayList<>(mCache.values()));
+        }
+
+        @Override
+        public void save(Note note) {
+            mCache.put(note.getId(), note);
+        }
+
+        @Override
+        public void update(Note note) {
+            mDataSource.update(note);
+        }
+
+        @Override
+        public void delete(Note note) {
+            mCache.remove(note.getId());
+            mDataSource.delete(note);
         }
 
         @Override
@@ -60,10 +72,9 @@ public interface NoteRepository {
         public List<Note> getByTitle(String title) {
             loadDataIfNeeded();
             List<Note> notes = new ArrayList<>();
-            for (int i = 0; i < mCache.size(); i++) {
-                Note selectedNote = mCache.valueAt(i);
-                if (selectedNote.mTitle.contains(title)) {
-                    notes.add(selectedNote);
+            for (Note note : mCache.values()) {
+                if (note.getTitle().contains(title)) {
+                    notes.add(note);
                 }
             }
             return Collections.unmodifiableList(notes);
@@ -71,15 +82,15 @@ public interface NoteRepository {
 
         @Override
         public boolean unsetFavorite(Note note) {
-            note.mFavorite = false;
-            mDataSource.update(note);
+            note.setFavorite(false);
+            update(note);
             return true;
         }
 
         @Override
         public boolean setFavorite(Note note) {
-            note.mFavorite = true;
-            mDataSource.update(note);
+            note.setFavorite(true);
+            update(note);
             return true;
         }
     }

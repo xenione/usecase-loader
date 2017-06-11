@@ -17,17 +17,25 @@ limitations under the License.
 
 import java.util.concurrent.Callable;
 
-public class UseCase<T> implements Callable<T> {
-    private Callable<T> mCallable;
+public abstract class UseCase<IN, OUT> implements Callable<OUT> {
 
-    public UseCase(Callable<T> callable) {
-        mCallable = callable;
-    }
+    IN param;
 
-    public void set(){}
+    public abstract <T extends ParamBuilder<IN>> T getParamBuilder();
 
-    @Override
-    public T call() throws Exception {
-        return mCallable.call();
+    public abstract static class ParamBuilder<IN> {
+
+        private UseCase<IN, ?> useCase;
+
+        public ParamBuilder(UseCase<IN, ?> useCase) {
+            this.useCase = useCase;
+        }
+
+        protected abstract IN buildParams();
+
+        public UseCase<IN, ?> apply() {
+            useCase.param = buildParams();
+            return useCase;
+        }
     }
 }
